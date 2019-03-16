@@ -35,10 +35,11 @@ class _MyHomePageState extends State<MyHomePage> {
           return new Scaffold(
             appBar: new AppBar(title: new Text('新的页面')),
             body: new Center(
-              child: new Text(
-                '点击浮动按钮返回首页',
-              ),
-            ),
+                child: new RaisedButton(
+                    child: new Text('back'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    })),
           );
         },
       ));
@@ -52,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: new Text(widget.title),
       ),
       body: new Center(
-        child: new FlatButton(
+        child: new RaisedButton(
           onPressed: _openNewPage,
           child: new Icon(Icons.arrow_forward),
         ),

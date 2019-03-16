@@ -9,11 +9,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Flutter Demo',
-      theme: new ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: new MyHomePage(title: '应用程序首页'),
+      home: new MyHomePage(title: '应用程序首页',),
       debugShowCheckedModeBanner: false,
+      routes: <String, WidgetBuilder> {
+        '/a': (BuildContext context) => new MyPage(title: 'A 页面'),
+        '/b': (BuildContext context) => new MyPage(title: 'B 页面'),
+        '/c': (BuildContext context) => new MyPage(title: 'C 页面'),
+        '/d': (BuildContext context) => new MyPage(title: 'D 页面'),
+        '/e': (BuildContext context) => new MyPage(title: 'E 页面')
+      },
     );
   }
 }
@@ -28,34 +32,74 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void _openNewPage() {
-    setState(() {
-      Navigator.of(context).push(new MaterialPageRoute<Null>(
-        builder: (BuildContext context) {
-          return new Scaffold(
-            appBar: new AppBar(title: new Text('新的页面')),
-            body: new Center(
-              child: new Text(
-                '点击浮动按钮返回首页',
-              ),
-            ),
-          );
-        },
-      ));
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text(widget.title),
+        actions: <Widget>[
+          new Expanded(
+            child: new Icon(null),
+          ),
+          new FlatButton(
+            child: new Text(
+              'A按钮',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                ),
+            ),
+            onPressed: () { Navigator.of(context).pushNamed('/a'); },
+          ),
+          new FlatButton(
+            child: new Text('B按钮'),
+            onPressed: () { Navigator.of(context).pushNamed('/b'); },
+          ),
+          new FlatButton(
+            child: new Text('C按钮'),
+            onPressed: () { Navigator.of(context).pushNamed('/c'); },
+          ),
+          new FlatButton(
+            child: new Text('D按钮'),
+            onPressed: () { Navigator.of(context).pushNamed('/d'); },
+          ),
+          new Expanded(
+            child: new Icon(null),
+          ),
+        ],
       ),
-      body: new Center(
-        child: new FlatButton(
-          onPressed: _openNewPage,
-          child: new Icon(Icons.arrow_forward),
-        ),
+      body: new Row(
+        children: <Widget>[
+          new RaisedButton(
+            child: new Text('A按钮'),
+            onPressed: () { Navigator.of(context).pushNamed('/a'); },
+          ),
+          new RaisedButton(
+            child: new Text('B按钮'),
+            onPressed: () { Navigator.of(context).pushNamed('/b'); },
+          ),
+          new RaisedButton(
+            child: new Text('C按钮'),
+            onPressed: () { Navigator.of(context).pushNamed('/c'); },
+          ),
+          new RaisedButton(
+            child: new Text('D按钮'),
+            onPressed: () { Navigator.of(context).pushNamed('/d'); },
+          ),
+        ],
+      )
+    );
+  }
+}
+
+class MyPage extends StatelessWidget {
+  MyPage({Key key, this.title}) : super(key: key);
+  final String title;
+
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text(title)
       ),
     );
   }
