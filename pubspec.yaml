@@ -70,3 +70,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages
+  fonts:
+    - family: Roboto
+      fonts:
+      - asset: assets/fonts/Roboto-Medium.ttf
+      - asset: assets/fonts/Roboto-MediumItalic.ttf
+      - asset: assets/fonts/Roboto-Bold.ttf
